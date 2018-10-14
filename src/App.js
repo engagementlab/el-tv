@@ -1,25 +1,46 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
+// import logo from './logo.svg';
+
+import Slideshow from 'react-slidez';
 
 class App extends Component {
-  render() {
+
+  constructor(props) {
+    super(props)
+
+    this.slideshow = this.slideshow.bind(this)
+  }
+
+  slideshow() {
+    const slidesList = [
+      'http://res.cloudinary.com/engagement-lab-home/image/upload/v1454529995/site/about/apb5l5krpgjmrmpsxfku.jpg',
+      'http://res.cloudinary.com/engagement-lab-home/image/upload/v1454529958/site/about/bba53b4i9kfltzhn7aye.jpg'
+    ]
+
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
+      <Slideshow
+        autoplay={true}
+        showArrows={false}
+        slideInterval={6500}
+        defaultIndex={0}
+        slides={slidesList}
+        effect={'fade'}
+        height={'100%'}
+        width={'100%'}
+      />
+    )
+  }
+
+  render() {
+    return (    
+      <div>
+        <div>
+          { this.slideshow() }
+        </div>
+        <div id="banner">
+          Welcome to the Engagement Lab!
+        </div>
       </div>
     );
   }
