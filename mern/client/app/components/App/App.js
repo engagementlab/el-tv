@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
-import './App.css';
+import './App.scss';
 
 import Slideshow from 'react-slidez';
+import axios from 'axios';
+
+import * as _ from 'lodash';
 
 class App extends Component {
 
@@ -9,13 +12,21 @@ class App extends Component {
     super(props)
 
     this.slideshow = this.slideshow.bind(this)
+    this.state = {
+      slidesList: null
+    }
+  }
+
+  async componentDidMount() {
+
+    const slidesList = _.map((await axios.get('http://localhost:8080/api/photos')).data, 'url');
+    this.setState({
+      slidesList,
+    });
+
   }
 
   slideshow() {
-    const slidesList = [
-      'http://res.cloudinary.com/engagement-lab-home/image/upload/v1454529995/site/about/apb5l5krpgjmrmpsxfku.jpg',
-      'http://res.cloudinary.com/engagement-lab-home/image/upload/v1454529958/site/about/bba53b4i9kfltzhn7aye.jpg'
-    ]
 
     return (
       <Slideshow
@@ -23,19 +34,21 @@ class App extends Component {
         showArrows={false}
         slideInterval={6500}
         defaultIndex={0}
-        slides={slidesList}
+        slides={this.state.slidesList}
         effect={'fade'}
         height={'100%'}
         width={'100%'}
       />
     )
+
   }
 
   render() {
     return (    
       <div>
         <div>
-          { this.slideshow() }
+          {this.state.slidesList === null &&  <p>Loading questions...</p>}
+          {this.state.slidesList && this.slideshow() }
         </div>
         <div id="banner">
           Welcome to the Engagement Lab!
