@@ -1,5 +1,11 @@
-#banner {
+@keyframes marquee {
+    0%   { text-indent: 27.5em }
+    100% { text-indent: -105em }
+}
+
+#chyron {
   position: absolute;
+  display: inline-block;
   z-index: 20;
   bottom: 0;
   width: 100%;
@@ -7,4 +13,18 @@
   font-size: xx-large;
   background-color: rgba(0, 0, 0, .3);
   color: white;
+
+  margin: 0 auto;
+  overflow: hidden;
+  white-space: nowrap;
+  box-sizing: border-box;
+  animation: marquee 50s linear infinite;
+
+  .item {
+  	display: inline-block;
+  	img {
+  		// margin-right: 3%;
+  		// margin-left: 3%;
+  	}
+  }
 }

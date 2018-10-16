@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
+
 import './App.scss';
+// import logo from '../logo.png';
 
 import Slideshow from 'react-slidez';
 import axios from 'axios';
@@ -13,15 +15,20 @@ class App extends Component {
 
     this.slideshow = this.slideshow.bind(this)
     this.state = {
-      slidesList: null
+      slidesList: null,
+      chyronContent: null
     }
   }
 
   async componentDidMount() {
 
-    const slidesList = _.map((await axios.get('http://localhost:8080/api/photos')).data, 'url');
+    const data = (await axios.get('http://localhost:3000/api/tv/get')).data[0];
+    const slidesList = _.map(data.slideshowImages, 'secure_url');
+    const chyronContent  = data.currentBlurb;
+
     this.setState({
       slidesList,
+      chyronContent
     });
 
   }
@@ -43,15 +50,27 @@ class App extends Component {
 
   }
 
+  chyron() {
+
+
+    const content = this.state.chyronContent.map((txt, key) => {
+        return <span class="item">
+                {txt} <img src="assets/img/logo.png" alt="Logo" />
+              </span>;
+    });
+    return content;
+
+  }
+
   render() {
     return (    
       <div>
         <div>
-          {this.state.slidesList === null &&  <p>Loading questions...</p>}
-          {this.state.slidesList && this.slideshow() }
+          {this.state.slidesList === null &&  <p>Loading...</p>}
+          { this.state.slidesList && this.slideshow() }
         </div>
-        <div id="banner">
-          Welcome to the Engagement Lab!
+        <div id="chyron">
+          { this.state.chyronContent && this.chyron() }
         </div>
       </div>
     );

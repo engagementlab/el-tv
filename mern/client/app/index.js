@@ -1,14 +1,19 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { BrowserRouter } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
 import App from './components/App/App';
-import NotFound from './components/App/NotFound';
+import Admin from './components/Admin/Admin';
+import './styles/styles.scss';
 
-ReactDOM.render(<App />, document.getElementById('root'));
+// ReactDOM.render(<App />, document.getElementById('root'));
+ReactDOM.render(
+  <Router>
+    <div>
+      <Route exact path="/" component={App} />
+      <Route path="/admin" component={Admin} />
+    </div>
+  </Router>, document.getElementById('root')
+);
 
-// render((
-//   <BrowserRouter>
-//     <App />
-//   </BrowserRouter>
-// ), document.getElementById('root'));
+// export default BasicExample;
