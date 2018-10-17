@@ -1,0 +1,24 @@
+{
+  "apps" : [
+    {
+      "name": "lab-tv",
+      "script": "node server.js",      
+      "exec_interpreter": "/home/node/.nvm/versions/node/v10.12.0/bin/node",
+      "env_production": {
+        "NODE_ENV": "production"
+      }
+    }
+  ],
+  "deploy" : {
+
+   "production" : {
+      "user" : "node",
+      "host" : "199.94.80.19",
+      "repo": "git@github.com:engagementgamelab/el-tv.git",
+      "ref": "origin/master",
+      "path": "/srv/el-tv/",
+      "post-deploy": "nvm use ; npm i ; webpack ; pm2 restart 'lab-tv"
+    }
+
+  }
+}
