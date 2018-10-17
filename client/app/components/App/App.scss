@@ -1,0 +1,61 @@
+@import "../../styles/_mixins";
+
+/* Move it (define the animation) */
+@include keyframes(marquee) {
+	0%   { 
+		// left: 0;
+		@include transform(translateX(0));
+	}
+	100% { 
+		// left: -100%;
+		@include transform(translateX(-100%));
+
+	}
+}
+
+iframe {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+}
+
+.video {
+	padding:56.25% 0 0 0;
+	position:relative;
+}
+
+#chyron {
+  position: absolute;
+  display: inline-block;
+  z-index: 20;
+  bottom: 0;
+  width: 100%;
+  text-align: center;
+  font-size: xx-large;
+  background-color: rgba(0, 0, 0, .3);
+  color: white;
+	
+	overflow: hidden;
+  margin: 0 auto;
+  white-space: nowrap;
+
+	#content {
+    display: inline-block;
+    padding-left: 100%;
+    padding-top: 1%;
+    padding-bottom: 1%;
+		@include animation(marquee 60s linear infinite);
+	}
+
+  .item {
+  	display: inline-flex;
+    align-items: center;
+  	img {
+  		display: inline-grid;
+  		padding-right: 7%;
+  		padding-left: 7%;
+  	}
+  }
+}
