@@ -6,7 +6,6 @@ import App from './components/App/App';
 import Admin from './components/Admin/Admin';
 import './styles/styles.scss';
 
-// ReactDOM.render(<App />, document.getElementById('root'));
 ReactDOM.render(
   <Router>
     <div>
@@ -15,5 +14,3 @@ ReactDOM.render(
     </div>
   </Router>, document.getElementById('root')
 );
-
-// export default BasicExample;
