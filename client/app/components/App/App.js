@@ -24,7 +24,8 @@ class App extends Component {
 
   async componentDidMount() {
 
-    const data = (await axios.get('http://localhost:3000/api/tv/get')).data[0];
+    let url = (process.env.NODE_ENV === 'production') ? 'https://elab.emerson.edu/' : 'http://localhost:3000/';
+    const data = (await axios.get(url+'api/tv/get')).data[0];
 
     const slidesList = _.map(data.slideshowImages, 'secure_url');
     const chyronContent = data.currentBlurb;
