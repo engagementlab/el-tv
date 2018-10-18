@@ -69,7 +69,7 @@ class App extends Component {
           slideInterval={6500}
           defaultIndex={0}
           slides={this.state.slidesList}
-          effect={'left'}
+          effect={'fade'}
           height={'100%'}
           width={'100%'}
         />
