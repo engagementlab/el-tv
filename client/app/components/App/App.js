@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 
 import './App.scss';
-// import logo from '../logo.png';
 
 import Slideshow from 'react-slidez';
 import axios from 'axios';
@@ -24,7 +23,7 @@ class App extends Component {
 
   async componentDidMount() {
 
-    let url = (process.env.NODE_ENV === 'production') ? 'https://elab.emerson.edu/' : 'http://localhost:3000/';
+    let url = (process.env.NODE_ENV === 'production') ? 'https://elab.emerson.edu/' : 'https://qa.engagementgamelab.org/';
     const data = (await axios.get(url+'api/tv/get')).data[0];
 
     const slidesList = _.map(data.slideshowImages, 'secure_url');
