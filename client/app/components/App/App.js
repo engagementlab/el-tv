@@ -69,7 +69,7 @@ class App extends Component {
           slideInterval={6500}
           defaultIndex={0}
           slides={this.state.slidesList}
-          effect={'fade'}
+          effect={'left'}
           height={'100%'}
           width={'100%'}
         />
@@ -91,7 +91,7 @@ class App extends Component {
     return content;
 
   }
-
+sudo apt-get update && sudo apt-get install xcompmgr libgl1-mesa-dri
   render() {
     return (    
       <div>

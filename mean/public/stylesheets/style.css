@@ -1,0 +1,110 @@
+body {
+  padding: 50px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+a {
+  color: #00B7FF;
+}
+.crossfade > figure {
+  animation: imageAnimation 30s linear infinite 0s;
+  backface-visibility: hidden;
+  background-size: cover;
+  background-position: center center;
+  color: transparent;
+  height: 100%;
+  left: 0px;
+  opacity: 0;
+  position: absolute;
+  top: 0px;
+  width: 100%;
+  z-index: 0;
+}
+.crossfade > figure:nth-child(1) { background-image: url('https://res.cloudinary.com/engagement-lab-home/image/upload/v1539713039/site/tv-slideshow/elnif3pdroubykkjrj5x.jpg'); }
+
+.crossfade > figure:nth-child(2) {
+  animation-delay: 6s;
+  background-image: url('https://res.cloudinary.com/engagement-lab-home/image/upload/v1539713039/site/tv-slideshow/mbksrw5ao5y0pm8oaroo.jpg');
+}
+
+.crossfade > figure:nth-child(3) {
+  animation-delay: 12s;
+  background-image: url('https://res.cloudinary.com/engagement-lab-home/image/upload/v1539713039/site/tv-slideshow/lioj1vknt95jdkgqwh19.jpg');
+}
+
+.crossfade > figure:nth-child(4) {
+  animation-delay: 18s;
+  background-image: url('https://res.cloudinary.com/engagement-lab-home/image/upload/v1539713039/site/tv-slideshow/xtcimrn9cw8uxca5wmik.jpg');
+}
+
+.crossfade > figure:nth-child(5) {
+  animation-delay: 24s;
+  background-image: url('https://res.cloudinary.com/engagement-lab-home/image/upload/v1539713039/site/tv-slideshow/dhwfp4nae5duf1oeu7ld.jpg');
+}
+
+#chyron {
+  position: absolute;
+  display: inline-block;
+  z-index: 20;
+  bottom: 0;
+  width: 100%;
+  text-align: center;
+  font-size: xx-large;
+  background-color: rgba(0, 0, 0, .3);
+  color: white;
+	
+	overflow: hidden;
+  margin: 0 auto;
+  white-space: nowrap;
+}
+
+	#content {
+    display: inline-block;
+    padding-left: 100%;
+    padding-top: 1%;
+    padding-bottom: 1%;
+		animation: marquee 60s linear infinite;
+	}
+
+  .item {
+  	display: inline-flex;
+    align-items: center;
+  	img {
+  		display: inline-grid;
+  		padding-right: 7%;
+  		padding-left: 7%;
+  	}
+  }
+
+/* Move it (define the animation) */
+@keyframes marquee {
+	0%   { 
+		// left: 0;
+		transform: translateX(0);
+	}
+	100% { 
+		// left: -100%;
+		transform: translateX(-100%);
+
+	}
+}
+
+@keyframes 
+imageAnimation {  0% {
+ animation-timing-function: ease-in;
+ opacity: 0;
+}
+ 8% {
+ animation-timing-function: ease-out;
+ opacity: 1;
+}
+ 17% {
+ opacity: 1
+}
+ 25% {
+ opacity: 0
+}
+ 100% {
+ opacity: 0
+}
+}
