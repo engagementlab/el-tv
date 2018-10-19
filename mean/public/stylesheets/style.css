@@ -25,6 +25,7 @@ body {
   display: inline-block;
   z-index: 20;
   bottom: 0;
+  height: 10%;
   width: 100%;
   text-align: center;
   font-size: xx-large;
@@ -35,14 +36,19 @@ body {
   margin: 0 auto;
   white-space: nowrap;
 }
-
+#content {
+	position: relative;
+	display: inline-block;
+	/*width: 100%;*/
+}
+/*
 #content {
   display: inline-block;
   padding-left: 100%;
   padding-top: 1%;
   padding-bottom: 1%;
 	animation: marquee 60s linear infinite;
-}
+}*/
 
 .item {
 	display: inline-flex;
