@@ -3,7 +3,7 @@ extends layout
 block content
 	.crossfade
 		each image, index in data.images
-			figure(style='background-image: url('+image.secure_url+'); animation-delay: '+(6*index)+'s;')
+			figure(style='background-image: url(https://res.cloudinary.com/engagement-lab-home/image/upload/c_scale,f_auto,w_1920/v10000/'+image.public_id+'); animation-delay: '+(6*index)+'s;')
 			|   
 
 	#chyron
