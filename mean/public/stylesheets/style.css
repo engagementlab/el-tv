@@ -20,26 +20,26 @@ a {
   width: 100%;
   z-index: 0;
 }
-.crossfade > figure:nth-child(1) { background-image: url('https://res.cloudinary.com/engagement-lab-home/image/upload/v1539713039/site/tv-slideshow/elnif3pdroubykkjrj5x.jpg'); }
+.crossfade > figure:nth-child(1) { background-image: url('https://res.cloudinary.com/engagement-lab-home/image/upload/f_auto/w_1920/v1539713039/site/tv-slideshow/elnif3pdroubykkjrj5x.jpg'); }
 
 .crossfade > figure:nth-child(2) {
   animation-delay: 6s;
-  background-image: url('https://res.cloudinary.com/engagement-lab-home/image/upload/v1539713039/site/tv-slideshow/mbksrw5ao5y0pm8oaroo.jpg');
+  background-image: url('https://res.cloudinary.com/engagement-lab-home/image/upload/f_auto/w_1920/v1539713039/site/tv-slideshow/mbksrw5ao5y0pm8oaroo.jpg');
 }
 
 .crossfade > figure:nth-child(3) {
   animation-delay: 12s;
-  background-image: url('https://res.cloudinary.com/engagement-lab-home/image/upload/v1539713039/site/tv-slideshow/lioj1vknt95jdkgqwh19.jpg');
+  background-image: url('https://res.cloudinary.com/engagement-lab-home/image/upload/f_auto/w_1920/v1539713039/site/tv-slideshow/lioj1vknt95jdkgqwh19.jpg');
 }
 
 .crossfade > figure:nth-child(4) {
   animation-delay: 18s;
-  background-image: url('https://res.cloudinary.com/engagement-lab-home/image/upload/v1539713039/site/tv-slideshow/xtcimrn9cw8uxca5wmik.jpg');
+  background-image: url('https://res.cloudinary.com/engagement-lab-home/image/upload/f_auto/w_1920/v1539713039/site/tv-slideshow/xtcimrn9cw8uxca5wmik.jpg');
 }
 
 .crossfade > figure:nth-child(5) {
   animation-delay: 24s;
-  background-image: url('https://res.cloudinary.com/engagement-lab-home/image/upload/v1539713039/site/tv-slideshow/dhwfp4nae5duf1oeu7ld.jpg');
+  background-image: url('https://res.cloudinary.com/engagement-lab-home/image/upload/f_auto/w_1920/v1539713039/site/tv-slideshow/dhwfp4nae5duf1oeu7ld.jpg');
 }
 
 #chyron {
