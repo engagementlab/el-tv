@@ -2,18 +2,13 @@ extends layout
 
 block content
 	.crossfade
-		figure
-		|   
-		figure
-		|   
-		figure
-		|   
-		figure
-		|   
-		figure
+		each image, index in data.images
+			figure(style='background-image: url('+image.secure_url+'); animation-delay: '+(6*index)+'s;')
+			|   
+
 	#chyron
 		#content
-			span.item
-				News item 1
-			span.item
-				News item 2
+			each item, index in data.chyron
+				span.item	#{item} 
+					if index < Object.keys(data.chyron).length - 1
+						img(src="images/logo.png")
