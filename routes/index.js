@@ -23,4 +23,10 @@ router.get('/', function(req, res, next) {
 
 });
 
+router.post('/', function (req, res) {
+	
+	req.app.io.emit('refresh');
+
+});
+
 module.exports = router;

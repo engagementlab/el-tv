@@ -20,6 +20,12 @@ block content
 		
 		function init() {
 
+		  var socket = io();
+		  // Refresh when new data posted
+			socket.on('refresh', function(msg){
+				window.location.reload(1);
+			});
+	
 			canvas = document.getElementById("content");
 			canvas.width = window.innerWidth;
 
@@ -38,11 +44,6 @@ block content
 			steps = 0;
 
 			runText();
-
-			// Refresh every hour
-			setTimeout(function() {
-				window.location.reload(1);
-			}, (60*1000)*60);
 		
 		}
 
