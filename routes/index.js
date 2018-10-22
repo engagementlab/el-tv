@@ -12,11 +12,11 @@ router.get('/', function(req, res, next) {
 
 		let data = {
 			images: body[0].slideshowImages,
-			chyron: body[0].currentBlurb,
+			chyron: JSON.stringify(body[0].currentBlurb),
 			hasVideo: body[0].displayVideo,
 			videoId:  body[0].videoId
 		};
-		console.log(data)
+		
 	  res.render('index', { 'data': data });
 
 	});

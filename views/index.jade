@@ -3,39 +3,30 @@ extends layout
 block content
 	img#logo(src="images/logo.png", style="display:none")
 
-	if data.hasVideo
-		- var url = 'https://res.cloudinary.com/engagement-lab-home/video/upload/v1540229774/tv_qsh055.mp4';
-			div
-				div.video
-					video(autoplay="autoplay")
-						source(src=url, type="video/webm")
-					//- iframe(src=url, width="360", height="480", frameBorder="0", webkitallowfullscreen="true", mozallowfullscreen="true", allowFullScreen, allow="autoplay; encrypted-media")
-					//- 	script(src="https://player.vimeo.com/api/player.js")
-	else
-		.crossfade
-			each image, index in data.images
-				figure(style='background-image: url(https://res.cloudinary.com/engagement-lab-home/image/upload/c_scale,f_auto,w_1920/v10000/'+image.public_id+'); animation-delay: '+(6*index)+'s;')
-				|   
+	.crossfade
+		each image, index in data.images
+			figure(style='background-image: url(https://res.cloudinary.com/engagement-lab-home/image/upload/c_scale,f_auto,w_1920/v10000/'+image.public_id+'); animation-delay: '+(6*index)+'s;')
+			|   
 
 	#chyron
 		canvas#content(height=90)
 
 	script.
-		var can, ctx, img, step, steps = 0, delay = 2;
+		var canvas, ctx, img, totalTxtWidth, step, steps = 0, delay = 2;
 		
-		var txt = ['Welcome!', 'Hygiene with Chhota Bheem Installed 16,000 Times Worldwide', 'This Friday, we\'ll be announcing the winners of our exclusive Optimus Ride experience LIVE on our Instagram'];
-		var totalTxtWidth;
+		var txt = !{data.chyron};
 		var itemTxtWidth = [];
+
 		
 		function init() {
-		
-			can = document.getElementById("content");
-			can.width = window.innerWidth;
-			ctx = can.getContext("2d");
+
+			canvas = document.getElementById("content");
+			canvas.width = window.innerWidth;
+
+			ctx = canvas.getContext("2d");
 			ctx.fillStyle = "white";
 			ctx.font = "20pt Work Sans";
 			ctx.textBaseline = "middle";
-
 			  
 			img = document.getElementById("logo");
 			totalTxtWidth = ctx.measureText(txt.join(' ')).width;
@@ -43,39 +34,54 @@ block content
 			for(var i in txt)
 				itemTxtWidth.push(ctx.measureText(txt[i]).width)
 
-			step = can.width;
+			step = canvas.width;
 			steps = 0;
 
-			RunTextLeftToRight();
+			runText();
+
+			// Refresh every hour
+			setTimeout(function() {
+				window.location.reload(1);
+			}, (60*1000)*60);
 		
 		}
 
 		function getTxtPos(index) {
+		
 			var length = 0;
 			for(var i = 0; i < index; i++)
 				length += itemTxtWidth[i]+100;
 
 			return length;
+		
 		}
 
-		function RunTextLeftToRight() {
+		function runText() {
+		
 			step--;
 			
-			ctx.clearRect(0, 0, can.width, can.height);
+			ctx.clearRect(0, 0, canvas.width, canvas.height);
 			ctx.save();
 			ctx.translate(step, 0);
 			
 			for(var i in txt) {
-				ctx.fillText(txt[i], getTxtPos(i), can.height / 2);
-				i++;
-				ctx.drawImage(img, getTxtPos(i)-75, (can.height / 4)-4);
+				
+				ctx.fillText(txt[i], getTxtPos(i), canvas.height / 2);
+				
+				if(i < txt.length-1) {
+					i++;
+					ctx.drawImage(img, getTxtPos(i)-75, (canvas.height / 4)-4);
+				}
+
 			}
 
 			ctx.restore();
+
 			if (step <= -(totalTxtWidth+(itemTxtWidth.length*100)))
-			    step = can.width;
+			    step = canvas.width;
 			if (step > -(totalTxtWidth+(itemTxtWidth.length*100)))
-			    var t = setTimeout('RunTextLeftToRight()', delay);
+			    setTimeout('runText()', delay);
+		
 		}
 
 		window.onload = function() { init(); };
