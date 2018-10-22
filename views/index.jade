@@ -3,20 +3,20 @@ extends layout
 block content
 	img#logo(src="images/logo.png", style="display:none")
 
-	.crossfade
-		each image, index in data.images
-			figure(style='background-image: url(https://res.cloudinary.com/engagement-lab-home/image/upload/c_scale,f_auto,w_1920/v10000/'+image.public_id+'); animation-delay: '+(6*index)+'s;')
-			|   
+	if data.hasVideo
+		- var url = 'https://player.vimeo.com/video/' + data.videoId + '?background=1&color=000000&byline=0&portrait=0';
+			div
+				div.video
+					iframe(src=url, frameBorder="0", webkitallowfullscreen="true", mozallowfullscreen="true", allowFullScreen)
+						script(src="https://player.vimeo.com/api/player.js")
+	else
+		.crossfade
+			each image, index in data.images
+				figure(style='background-image: url(https://res.cloudinary.com/engagement-lab-home/image/upload/c_scale,f_auto,w_1920/v10000/'+image.public_id+'); animation-delay: '+(6*index)+'s;')
+				|   
 
 	#chyron
 		canvas#content(height=90)
-		//- #content
-		//- 	each item, index in data.chyron
-		//- 		span.item	#{item} 
-		//- 			if index < Object.keys(data.chyron).length - 1
-		//- 				
-
-
 
 	script.
 		var can, ctx, img, step, steps = 0, delay = 2;
@@ -32,7 +32,6 @@ block content
 			ctx = can.getContext("2d");
 			ctx.fillStyle = "white";
 			ctx.font = "20pt Work Sans";
-			//- ctx.textAlign = "center";
 			ctx.textBaseline = "middle";
 
 			  
