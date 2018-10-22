@@ -4,11 +4,13 @@ block content
 	img#logo(src="images/logo.png", style="display:none")
 
 	if data.hasVideo
-		- var url = 'https://player.vimeo.com/video/' + data.videoId + '?background=1&color=000000&byline=0&portrait=0';
+		- var url = 'https://res.cloudinary.com/engagement-lab-home/video/upload/v1540229774/tv_qsh055.mp4';
 			div
 				div.video
-					iframe(src=url, frameBorder="0", webkitallowfullscreen="true", mozallowfullscreen="true", allowFullScreen)
-						script(src="https://player.vimeo.com/api/player.js")
+					video(autoplay="autoplay")
+						source(src=url, type="video/webm")
+					//- iframe(src=url, width="360", height="480", frameBorder="0", webkitallowfullscreen="true", mozallowfullscreen="true", allowFullScreen, allow="autoplay; encrypted-media")
+					//- 	script(src="https://player.vimeo.com/api/player.js")
 	else
 		.crossfade
 			each image, index in data.images
