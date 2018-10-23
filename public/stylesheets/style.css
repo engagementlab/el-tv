@@ -7,7 +7,10 @@ body {
 }
 
 .crossfade > figure {
-  animation: imageAnimation 30s linear infinite 0s;
+  animation-name: imageAnimation;
+  animation-timing-function:  linear;
+  animation-iteration-count: infinite;
+
   backface-visibility: hidden;
   background-size: cover;
   background-position: center center;
@@ -90,13 +93,10 @@ iframe {
 	 animation-timing-function: ease-out;
 	 opacity: 1;
 	}
-	17% {
-	 opacity: 1
-	}
 	25% {
-		opacity: 0
+		opacity: 0;
 	}
 	100% {
-		opacity: 0
+		opacity: 0;
 	}
 }
