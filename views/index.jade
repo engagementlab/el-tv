@@ -5,7 +5,7 @@ block content
 
 	.crossfade
 		each image, index in data.images
-			figure(style='background-image: url(https://res.cloudinary.com/engagement-lab-home/image/upload/c_scale,f_auto,w_1920/v10000/'+image.public_id+'); animation-delay: '+(8*index)+'s; animation-duration: '+(6*data.images.length)+'s')
+			figure(style='background-image: url(https://res.cloudinary.com/engagement-lab-home/image/upload/c_scale,f_auto,w_1920,q_50/v10000/'+image.public_id+'); animation-delay: '+(8*index)+'s; animation-duration: '+(6*data.images.length)+'s')
 			|   
 
 	#chyron
@@ -20,7 +20,12 @@ block content
 		
 		function init() {
 
-		  var socket = io();
+		  var socket = io( {
+				reconnection: true,
+				reconnectionDelay: 1000,
+				reconnectionDelayMax : 5000,
+				reconnectionAttempts: 99999
+			});
 		  // Refresh when new data posted
 			socket.on('refresh', function(msg){
 				window.location.reload(1);
