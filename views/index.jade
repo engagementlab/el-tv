@@ -3,10 +3,14 @@ extends layout
 block content
 	img#logo(src="images/logo.png", style="display:none")
 
-	.crossfade
-		each image, index in data.images
-			figure(style='background-image: url(https://res.cloudinary.com/engagement-lab-home/image/upload/c_scale,f_auto,w_1920,q_50/v10000/'+image.public_id+'); animation-delay: '+(8*index)+'s; animation-duration: '+(6*data.images.length)+'s')
-			|   
+	//- .crossfade
+	//- 	each image, index in data.images
+	//- 		figure(style='background-image: url(https://res.cloudinary.com/engagement-lab-home/image/upload/c_scale,f_auto,w_1920,q_50/v10000/'+image.public_id+'); animation-delay: '+(8*index)+'s; animation-duration: '+(6*data.images.length)+'s')
+	//- 		|   
+
+	#video
+		video(autoplay='', muted='')
+			source(src=data, type='video/mp4')
 
 	#chyron
 		canvas#content(height=90)
@@ -14,7 +18,7 @@ block content
 	script.
 		var canvas, ctx, img, totalTxtWidth, step, steps = 0, delay = 2;
 		
-		var txt = !{data.chyron};
+		var txt = ['Sample', 'Sample 2'];
 		var itemTxtWidth = [];
 
 		
