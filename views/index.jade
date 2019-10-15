@@ -75,6 +75,10 @@ block content
 				box = new THREE.Box3().setFromObject(textMesh);
 
 				scene.updateMatrixWorld(true);
+		
+				new TWEEN.Tween(textMesh.position)
+					.to(textMesh.position.clone().setX(-50));
+					
 				animate();
 			});
 
@@ -84,26 +88,27 @@ block content
 
 			requestAnimationFrame(animate);
 
-			if (textMesh) {
+			//- if (textMesh) {
 
-				textMesh.translateX(-.06);
-				var frustum = new THREE.Frustum();
-				var cameraViewProjectionMatrix = new THREE.Matrix4();
+			//- 	textMesh.translateX(-.06);
+			//- 	var frustum = new THREE.Frustum();
+			//- 	var cameraViewProjectionMatrix = new THREE.Matrix4();
 
-				// every time the camera or objects change position (or every frame)
+			//- 	// every time the camera or objects change position (or every frame)
 
-				camera.updateMatrixWorld(); // make sure the camera matrix is updated
-				camera.matrixWorldInverse.getInverse(camera.matrixWorld);
-				cameraViewProjectionMatrix.multiplyMatrices(camera.projectionMatrix, camera.matrixWorldInverse);
-				frustum.setFromMatrix(cameraViewProjectionMatrix);
-				let outBounds = !frustum.intersectsObject(textMesh);
-				if (outBounds) {
-					// console.log(textMesh.position)
-					textMesh.position.set(0, 0, 0)
-				}
-			}
-			renderer.render(scene, camera);
+			//- 	camera.updateMatrixWorld(); // make sure the camera matrix is updated
+			//- 	camera.matrixWorldInverse.getInverse(camera.matrixWorld);
+			//- 	cameraViewProjectionMatrix.multiplyMatrices(camera.projectionMatrix, camera.matrixWorldInverse);
+			//- 	frustum.setFromMatrix(cameraViewProjectionMatrix);
+			//- 	let outBounds = !frustum.intersectsObject(textMesh);
+			//- 	if (outBounds) {
+			//- 		// console.log(textMesh.position)
+			//- 		textMesh.position.set(0, 0, 0)
+			//- 	}
+			//- }
+			if(camera)
+				renderer.render(scene, camera);
 
 		}
 
-		window.onload = function() { init(); };
+		//- window.onload = function() { init(); };
