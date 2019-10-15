@@ -7,20 +7,18 @@ const express = require('express'),
 /* GET home page. */
 router.get('/', function(req, res, next) {
 
-	let url = (process.env.NODE_ENV === 'production') ? 'https://elab.emerson.edu/' : 'https://qa.engagementgamelab.org/';
-	let data = 'https://res.cloudinary.com/engagement-lab-home/video/upload/v1570742177/el-tv/slideshow.mp4';
-	res.render('index', { 'data': data });
-	// request({ url: url+'api/tv/get', json: true }, (error, response, body) => {
-
-	// 	let data = {
-	// 		images: body[0].slideshowImages,
-	// 		chyron: JSON.stringify(body[0].currentBlurb),
-	// 		hasVideo: body[0].displayVideo,
-	// 		videoId:  body[0].videoId
-	// 	};
+	let url = 'https://elab.emerson.edu/';
+	let videoUrl = 'https://res.cloudinary.com/engagement-lab-home/video/upload/v1570742177/el-tv/slideshow.mp4';
+	request({ url: url+'api/tv/get', json: true }, (error, response, body) => {
 		
+		let data = {
+			chyron: JSON.stringify(body[0].currentBlurb),
+			video: videoUrl
+		};
+		
+		res.render('index', { 'data': data });
 
-	// });
+	});
 
 });
 
