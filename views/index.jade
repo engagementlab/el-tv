@@ -37,21 +37,34 @@ block content
 			canvas = document.getElementById("content");
 			canvas.width = window.innerWidth;
 
-			ctx = canvas.getContext("2d");
-			ctx.fillStyle = "white";
-			ctx.font = "20pt Work Sans";
-			ctx.textBaseline = "middle";
+			//- ctx = canvas.getContext("2d");
+			//- ctx.fillStyle = "white";
+			//- ctx.font = "20pt Work Sans";
+			//- ctx.textBaseline = "middle";
 			  
 			img = document.getElementById("logo");
-			totalTxtWidth = ctx.measureText(txt.join(' ')).width;
+			//- totalTxtWidth = ctx.measureText(txt.join(' ')).width;
 			
-			for(var i in txt)
-				itemTxtWidth.push(ctx.measureText(txt[i]).width)
+			//- for(var i in txt)
+			//- 	itemTxtWidth.push(ctx.measureText(txt[i]).width)
 
 			step = canvas.width;
 			steps = 0;
 
-			runText();
+			//- runText();
+
+
+
+			var stage = new createjs.Stage("content");
+			var text = new createjs.Text("Hello World", "20pt Work Sans", "#FFF");
+			text.x = canvas.width;
+			text.y = canvas.height / 2;
+			text.textBaseline = "middle";
+			stage.addChild(text)
+			stage.update();
+			createjs.Tween.get(text, { loop: true }).to({ x: -400 }, 10000)
+			createjs.Ticker.setFPS(60);
+			createjs.Ticker.addEventListener("tick", stage);
 		
 		}
 
