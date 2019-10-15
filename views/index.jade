@@ -63,7 +63,7 @@ block content
 			stage.addChild(text)
 			stage.update();
 			createjs.Tween.get(text, { loop: true }).to({ x: -400 }, 10000)
-			createjs.Ticker.setFPS(60);
+			createjs.Ticker.setFPS(120);
 			createjs.Ticker.addEventListener("tick", stage);
 		
 		}
