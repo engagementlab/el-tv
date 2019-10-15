@@ -13,14 +13,14 @@ block content
 			source(src=data, type='video/mp4')
 
 	#chyron
-		canvas#content(height=90)
+		//- canvas#content(height=90)
 
 	script.
 		var canvas, ctx, img, totalTxtWidth, step, steps = 0, delay = 2;
 		
 		var txt = ['Sample', 'Sample 2'];
 		var itemTxtWidth = [];
-
+			var mesh, renderer, scene, camera, controls, textMesh, textGeo;
 		
 		function init() {
 
@@ -34,64 +34,76 @@ block content
 			socket.on('refresh', function(msg){
 				window.location.reload(1);
 			});
-	
-			canvas = document.getElementById("content");
-			canvas.width = window.innerWidth;
-
-			ctx = canvas.getContext("2d");
-			ctx.fillStyle = "white";
-			ctx.font = "20pt Work Sans";
-			ctx.textBaseline = "middle";
-			  
-			img = document.getElementById("logo");
-			totalTxtWidth = ctx.measureText(txt.join(' ')).width;
-			
-			for(var i in txt)
-				itemTxtWidth.push(ctx.measureText(txt[i]).width)
-
-			step = canvas.width;
-			steps = 0;
 
 			runText();
 		
 		}
 
-		function getTxtPos(index) {
-		
-			var length = 0;
-			for(var i = 0; i < index; i++)
-				length += itemTxtWidth[i]+100;
+		function runText() {
 
-			return length;
-		
+			// renderer
+			renderer = new THREE.WebGLRenderer();
+			renderer.setSize( window.innerWidth, 90 );
+			document.getElementById('chyron').appendChild( renderer.domElement );
+
+			// scene
+			scene = new THREE.Scene();
+
+			let width = window.innerWidth;
+			let height = 90;
+			camera = new THREE.OrthographicCamera(window.innerWidth / -50, window.innerWidth / 50, 90 / 50, 90 / -50, -500, 1000);
+
+			var loader = new THREE.FontLoader();
+			loader.load('https://res.cloudinary.com/engagement-lab-home/raw/upload/v1570825523/el-tv/Open_Sans_Semibold_Regular.json', (font) => {
+
+				textGeo = new THREE.TextGeometry('Hello three.js!', {
+					font: font,
+					size: 1,
+					height: 0
+				});
+
+				var textMaterial = new THREE.LineBasicMaterial({
+					color: 0xffffff,
+					side: THREE.DoubleSide
+				});
+
+				textMesh = new THREE.Mesh(textGeo, textMaterial);
+				textGeo.computeBoundingBox();
+				textMesh.position.set(150, 0, 0)
+				scene.add(textMesh);
+
+				box = new THREE.Box3().setFromObject(textMesh);
+
+				scene.updateMatrixWorld(true);
+				animate();
+			});
+
 		}
 
-		function runText() {
-		
-			step--;
-			
-			ctx.clearRect(0, 0, canvas.width, canvas.height);
-			ctx.save();
-			ctx.translate(step, 0);
-			
-			for(var i in txt) {
-				
-				ctx.fillText(txt[i], getTxtPos(i), canvas.height / 2);
-				
-				if(i < txt.length-1) {
-					i++;
-					ctx.drawImage(img, getTxtPos(i)-75, (canvas.height / 4)-4);
+		function animate() {
+
+			requestAnimationFrame(animate);
+
+			if (textMesh) {
+
+				textMesh.translateX(-.06);
+				var frustum = new THREE.Frustum();
+				var cameraViewProjectionMatrix = new THREE.Matrix4();
+
+				// every time the camera or objects change position (or every frame)
+
+				camera.updateMatrixWorld(); // make sure the camera matrix is updated
+				camera.matrixWorldInverse.getInverse(camera.matrixWorld);
+				cameraViewProjectionMatrix.multiplyMatrices(camera.projectionMatrix, camera.matrixWorldInverse);
+				frustum.setFromMatrix(cameraViewProjectionMatrix);
+				let outBounds = !frustum.intersectsObject(textMesh);
+				if (outBounds) {
+					// console.log(textMesh.position)
+					textMesh.position.set(0, 0, 0)
 				}
-
 			}
+			renderer.render(scene, camera);
 
-			ctx.restore();
-
-			if (step <= -(totalTxtWidth+(itemTxtWidth.length*100)))
-			    step = canvas.width;
-			if (step > -(totalTxtWidth+(itemTxtWidth.length*100)))
-			    setTimeout('runText()', delay);
-		
 		}
 
 		window.onload = function() { init(); };
