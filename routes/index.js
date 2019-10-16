@@ -8,7 +8,7 @@ const express = require('express'),
 router.get('/', function(req, res, next) {
 
 	let url = 'https://elab.emerson.edu/';
-	let videoUrl = 'https://res.cloudinary.com/engagement-lab-home/video/upload/v1570742177/el-tv/slideshow.mp4';
+	let videoUrl = 'https://res.cloudinary.com/engagement-lab-home/video/upload/v1571255474/el-tv/slideshow.mp4';
 	request({ url: url+'api/tv/get', json: true }, (error, response, body) => {
 		
 		let data = {

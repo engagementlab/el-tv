@@ -27,9 +27,7 @@
 
 #----------------------------------------------------------------
 # SETTINGS
-input_dir="./slides"  # Replace this by a path to your folder /path/to/your/folder
-n_files=9                        # Replace this by a number of images
-files=`ls ${input_dir}/*.jpg | head -${n_files}`  # Change the file type to the correct type of your images
+input_dir="./public/images/slides"  # Replace this by a path to your folder /path/to/your/folder
 output_file="video.mp4"           # Name of output video
 crossfade=0.9                     # Crossfade duration between two images
 #----------------------------------------------------------------
@@ -38,6 +36,9 @@ crossfade=0.9                     # Crossfade duration between two images
 input=""
 filters=""
 output="[0:v]"
+
+n_files=`ls -1q ${input_dir} | wc -l`
+files=`ls ${input_dir}/*.jpg`  # Change the file type to the correct type of your images
 
 i=0
 
@@ -58,7 +59,7 @@ done
 
 output+="concat=n=$((i * 2 - 1)):v=1:a=0,format=yuv420p[v]\" -map \"[v]\" ${output_file}"
 
-script="ffmpeg ${input} -filter_complex \"${filters} ${output}"
+script="ffmpeg -y ${input} -filter_complex \"${filters} ${output}"
 
 echo ${script}
 
